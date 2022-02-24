@@ -55,7 +55,6 @@ $tasks = Yii::$app->db->createCommand($sql)->queryAll();
 
   </div>
   <div class="tab-pane fade" id="preptab" role="tabpanel" aria-labelledby="preptab-tab">
-  
         <br />
         <h2>Prep</h2>   
         <hr />          
