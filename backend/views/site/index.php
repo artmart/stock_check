@@ -1,5 +1,5 @@
 <?php
-$this->title = 'My Yii Application';
+$this->title = 'Admin Dashboard';
 ?>
 <div class="site-index">
 

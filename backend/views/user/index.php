@@ -38,8 +38,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $arr[$data->user_group];
                     }, // ($data->user_group==1)?'Administrator':'User';}, 
             ],
-            //'status',
-            
             [
                 'attribute' => 'status',
                 'filter'=>['10' => 'Active', '9' => 'Inactive'],

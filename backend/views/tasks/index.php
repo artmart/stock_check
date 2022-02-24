@@ -36,6 +36,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         return $arr[$data->task_group];
                     },  
             ],
+            [
+                'attribute' => 'status',
+                'filter'=>['1' => 'Active', '0' => 'Inactive'],
+                 'format' => 'raw',
+                'value'=>  function($data) {return ($data->status==1)?'Active':'Inactive';}, 
+            ],
             'task',
             [
                 'class' => ActionColumn::className(),

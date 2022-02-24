@@ -17,7 +17,7 @@ class TasksSearch extends Tasks
     public function rules()
     {
         return [
-            [['id', 'task_group'], 'integer'],
+            [['id', 'task_group', 'status'], 'integer'],
             [['task'], 'safe'],
         ];
     }
@@ -60,6 +60,7 @@ class TasksSearch extends Tasks
         $query->andFilterWhere([
             'id' => $this->id,
             'task_group' => $this->task_group,
+            'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'task', $this->task]);

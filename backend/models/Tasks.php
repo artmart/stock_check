@@ -29,7 +29,7 @@ class Tasks extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['task_group'], 'integer'],
+            [['task_group', 'status'], 'integer'],
             [['task'], 'required'],
             [['task'], 'string', 'max' => 255],
         ];
@@ -43,6 +43,7 @@ class Tasks extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'task_group' => 'Task Group',
+            'status' => 'Status',
             'task' => 'Task',
         ];
     }

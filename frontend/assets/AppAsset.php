@@ -18,6 +18,8 @@ class AppAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
+        'yii\web\JqueryAsset',
         'yii\bootstrap4\BootstrapAsset',
     ];
+    public $jsOptions = [ 'position' => \yii\web\View::POS_HEAD ];
 }
