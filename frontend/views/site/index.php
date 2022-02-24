@@ -52,7 +52,6 @@ $tasks = Yii::$app->db->createCommand($sql)->queryAll();
           <div id="wait0" style="display:none; z-index: 1000;" class="justify-content-center align-items-center"> <img src='/img/ajaxloader.gif'/> Loading...</div>
           <div class="row"><div id="results0" style="width: 100%;"></div></div>
         </form>
-
   </div>
   <div class="tab-pane fade" id="preptab" role="tabpanel" aria-labelledby="preptab-tab">
         <br />
