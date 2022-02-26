@@ -6,8 +6,6 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 use backend\models\Tasks;
 
-//use yii\bootstrap4\LinkPager;
-
 $this->title = 'Tasks';
 $this->params['breadcrumbs'][] = $this->title;
 ?>

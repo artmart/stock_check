@@ -32,6 +32,9 @@ class Tasks extends \yii\db\ActiveRecord
             [['task_group', 'status'], 'integer'],
             [['task'], 'required'],
             [['task'], 'string', 'max' => 255],
+            [['note'], 'string'],
+            
+            
         ];
     }
 
@@ -45,6 +48,7 @@ class Tasks extends \yii\db\ActiveRecord
             'task_group' => 'Task Group',
             'status' => 'Status',
             'task' => 'Task',
+            'note' => 'Note',
         ];
     }
 

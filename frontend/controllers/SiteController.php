@@ -82,15 +82,31 @@ class SiteController extends Controller
     
     public function actionPreopeningsave()
     {
-        $pre_opening = $this->request->post(); 
+        $pre_opening = $this->request->post();         
+        $user_id = Yii::$app->user->id;
+        $keys = [];
         foreach($pre_opening['pre_opening'] as $key=>$po){
-            $model = new Taskresponses();
-            $model->user_id =  Yii::$app->user->id;
-            $model->task_id = $key;
-            $model->timestamp = date("Y-m-d h:i:s");
-            $model->response = $po;
-            $model->save();
+            $keys[] = $key;
+            $available_data = Taskresponses::find()->Where(" user_id = $user_id And task_id = $key And response=$po and DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT(CURDATE(), '%Y-%m-%d')")->all();
+            $cnt = count($available_data);
+            
+            if($cnt==0){
+                $model = new Taskresponses();
+                $model->user_id = $user_id;
+                $model->task_id = $key;
+                $model->timestamp = date("Y-m-d h:i:s");
+                $model->response = $po;
+                $model->save();
+            }
         }
+        
+        $keys_list = implode("', '", $keys); 
+        $delete_sql = "DELETE FROM task_responses 
+                       WHERE user_id = $user_id And task_id Not IN('$keys_list') 
+                       And DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT(CURDATE(), '%Y-%m-%d') 
+                       AND task_id IN (SELECT id FROM tasks WHERE task_group = 0)";
+                                
+        \Yii::$app->db->createCommand($delete_sql)->execute();
         echo '<div class="alert alert-success"><strong>Success!</strong> Data saved successfully.</div>';
     }
     
@@ -99,14 +115,29 @@ class SiteController extends Controller
     public function actionPrepsave()
     {
         $prep = $this->request->post(); 
+        $user_id = Yii::$app->user->id;
+        $keys = [];
         foreach($prep['prep'] as $key=>$p){
-            $model = new Taskresponses();
-            $model->user_id =  Yii::$app->user->id;
-            $model->task_id = $key;
-            $model->timestamp = date("Y-m-d h:i:s");
-            $model->response = $p;
-            $model->save();
+            $keys[] = $key;
+            $available_data = Taskresponses::find()->Where(" user_id = $user_id And task_id = $key And response=$p and DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT(CURDATE(), '%Y-%m-%d')")->all();
+            $cnt = count($available_data);
+            
+            if($cnt==0){
+                $model = new Taskresponses();
+                $model->user_id = $user_id;
+                $model->task_id = $key;
+                $model->timestamp = date("Y-m-d h:i:s");
+                $model->response = $p;
+                $model->save();
+            }
         }
+        $keys_list = implode("', '", $keys); 
+        $delete_sql = "DELETE FROM task_responses 
+               WHERE user_id = $user_id And task_id Not IN('$keys_list') 
+               And DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT(CURDATE(), '%Y-%m-%d') 
+               AND task_id IN (SELECT id FROM tasks WHERE task_group = 1)";
+               
+        \Yii::$app->db->createCommand($delete_sql)->execute();
         echo '<div class="alert alert-success"><strong>Success!</strong> Data saved successfully.</div>';  
     }
     
@@ -114,14 +145,28 @@ class SiteController extends Controller
     public function actionClosingsave()
     {
         $closing = $this->request->post(); 
+        $user_id = Yii::$app->user->id;
+        $keys = [];
         foreach($closing['closing'] as $key=>$c){
-            $model = new Taskresponses();
-            $model->user_id =  Yii::$app->user->id;
-            $model->task_id = $key;
-            $model->timestamp = date("Y-m-d h:i:s");
-            $model->response = $c;
-            $model->save();
+            $keys[] = $key;
+            $available_data = Taskresponses::find()->Where(" user_id = $user_id And task_id = $key And response=$c and DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT(CURDATE(), '%Y-%m-%d')")->all();
+            $cnt = count($available_data);
+            
+            if($cnt==0){
+                $model = new Taskresponses();
+                $model->user_id = $user_id;
+                $model->task_id = $key;
+                $model->timestamp = date("Y-m-d h:i:s");
+                $model->response = $c;
+                $model->save();
+            }
         }
+        $keys_list = implode("', '", $keys);
+        $delete_sql = "DELETE FROM task_responses 
+               WHERE user_id = $user_id And task_id Not IN('$keys_list') 
+               And DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT(CURDATE(), '%Y-%m-%d') 
+               AND task_id IN (SELECT id FROM tasks WHERE task_group = 2)"; 
+        \Yii::$app->db->createCommand($delete_sql)->execute();    
         echo '<div class="alert alert-success"><strong>Success!</strong> Data saved successfully.</div>';
     }
 

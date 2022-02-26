@@ -49,6 +49,7 @@ $tasks = Yii::$app->db->createCommand($sql)->queryAll();
         <?php } } ?>
         <hr />
           <button type="submit" class="btn btn-primary" onclick="preopeningsave()">Submit</button> 
+          <hr />
           <div id="wait0" style="display:none; z-index: 1000;" class="justify-content-center align-items-center"> <img src='/img/ajaxloader.gif'/> Loading...</div>
           <div class="row"><div id="results0" style="width: 100%;"></div></div>
         </form>
@@ -68,6 +69,7 @@ $tasks = Yii::$app->db->createCommand($sql)->queryAll();
         <?php } } ?>
         <hr />
           <button type="submit" class="btn btn-primary" onclick="prepsave()">Submit</button> 
+          <hr />
           <div id="wait1" style="display:none; z-index: 1000;" class="justify-content-center align-items-center"> <img src='/img/ajaxloader.gif'/> Loading...</div>
           <div class="row"><div id="results1" style="width: 100%;"></div></div>
         </form>
@@ -88,6 +90,7 @@ $tasks = Yii::$app->db->createCommand($sql)->queryAll();
         <?php } } ?>
         <hr />
           <button type="submit" class="btn btn-primary" onclick="closingsave()">Submit</button> 
+          <hr />
           <div id="wait2" style="display:none; z-index: 1000;" class="justify-content-center align-items-center"> <img src='/img/ajaxloader.gif'/> Loading...</div>
           <div class="row"><div id="results2" style="width: 100%;"></div></div>
         </form>
@@ -99,11 +102,8 @@ $tasks = Yii::$app->db->createCommand($sql)->queryAll();
     </div>
 </div>
 
-<script>
-$("#pre_opening_form").submit(function(){return false;});
-$("#prep_form").submit(function(){return false;});
-$("#closing_form").submit(function(){return false;});
-
+<?php 
+/*
 if(<?=$pre_opening_disable?>){
     $("#pre_opening_form input").prop("disabled", true);
     $('#pre_opening_form :input[type=submit]').prop('disabled', true);
@@ -118,6 +118,17 @@ if(<?=$closing_disable?>){
     $("#closing_form input").prop("disabled", true);
     $('#closing_form :input[type=submit]').prop('disabled', true);
 }
+
+*/ 
+?>
+
+
+<script>
+$("#pre_opening_form").submit(function(){return false;});
+$("#prep_form").submit(function(){return false;});
+$("#closing_form").submit(function(){return false;});
+
+
 	
 function preopeningsave(){
 

@@ -9,9 +9,8 @@ use yii\widgets\ActiveForm;
     <?php // $form->field($model, 'task_group')->textInput() ?>
     <?= $form->field($model, 'task_group')->dropDownList(['0' => 'Pre Opening', '1' => 'Prep', '2' => 'Closing'], ['prompt'=>'- Select -']); ?>
     <?= $form->field($model, 'status')->dropDownList(['0' => 'Inactive', '1' => 'Active'] /*, ['prompt'=>'- Select -']*/); ?>
-    
     <?= $form->field($model, 'task')->textInput(['maxlength' => true]) ?>
-
+    <?= $form->field($model, 'note')->textarea(['rows' => 5]) ?>
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
