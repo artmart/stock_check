@@ -28,7 +28,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index', 'results'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -57,29 +57,33 @@ class SiteController extends Controller
 
     /**
      * Displays homepage.
-     *
      * @return string
      */
     public function actionIndex()
     {
         return $this->render('index');
     }
+    
+    public function actionResults()
+    {
+        //var_dump($_REQUEST);
+        return $this->renderPartial('results');
+    }
 
     /**
      * Login action.
-     *
      * @return string|Response
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
+        if(!Yii::$app->user->isGuest){
             return $this->goHome();
         }
 
         $this->layout = 'blank';
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        if ($model->load(Yii::$app->request->post()) && $model->login()){
             return $this->goBack();
         }
 

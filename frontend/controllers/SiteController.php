@@ -84,17 +84,18 @@ class SiteController extends Controller
     {
         $pre_opening = $this->request->post();         
         $user_id = Yii::$app->user->id;
+        $today = date("Y-m-d h:i:s");
         $keys = [];
         foreach($pre_opening['pre_opening'] as $key=>$po){
             $keys[] = $key;
-            $available_data = Taskresponses::find()->Where(" user_id = $user_id And task_id = $key And response=$po and DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT(CURDATE(), '%Y-%m-%d')")->all();
+            $available_data = Taskresponses::find()->Where(" user_id = $user_id And task_id = $key And response=$po and DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT('$today', '%Y-%m-%d')")->all();
             $cnt = count($available_data);
             
             if($cnt==0){
                 $model = new Taskresponses();
                 $model->user_id = $user_id;
                 $model->task_id = $key;
-                $model->timestamp = date("Y-m-d h:i:s");
+                $model->timestamp = $today;
                 $model->response = $po;
                 $model->save();
             }
@@ -103,7 +104,7 @@ class SiteController extends Controller
         $keys_list = implode("', '", $keys); 
         $delete_sql = "DELETE FROM task_responses 
                        WHERE user_id = $user_id And task_id Not IN('$keys_list') 
-                       And DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT(CURDATE(), '%Y-%m-%d') 
+                       And DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT('$today', '%Y-%m-%d') 
                        AND task_id IN (SELECT id FROM tasks WHERE task_group = 0)";
                                 
         \Yii::$app->db->createCommand($delete_sql)->execute();
@@ -116,17 +117,18 @@ class SiteController extends Controller
     {
         $prep = $this->request->post(); 
         $user_id = Yii::$app->user->id;
+        $today = date("Y-m-d h:i:s");
         $keys = [];
         foreach($prep['prep'] as $key=>$p){
             $keys[] = $key;
-            $available_data = Taskresponses::find()->Where(" user_id = $user_id And task_id = $key And response=$p and DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT(CURDATE(), '%Y-%m-%d')")->all();
+            $available_data = Taskresponses::find()->Where(" user_id = $user_id And task_id = $key And response=$p and DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT('$today', '%Y-%m-%d')")->all();
             $cnt = count($available_data);
             
             if($cnt==0){
                 $model = new Taskresponses();
                 $model->user_id = $user_id;
                 $model->task_id = $key;
-                $model->timestamp = date("Y-m-d h:i:s");
+                $model->timestamp = $today;
                 $model->response = $p;
                 $model->save();
             }
@@ -134,7 +136,7 @@ class SiteController extends Controller
         $keys_list = implode("', '", $keys); 
         $delete_sql = "DELETE FROM task_responses 
                WHERE user_id = $user_id And task_id Not IN('$keys_list') 
-               And DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT(CURDATE(), '%Y-%m-%d') 
+               And DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT('$today', '%Y-%m-%d') 
                AND task_id IN (SELECT id FROM tasks WHERE task_group = 1)";
                
         \Yii::$app->db->createCommand($delete_sql)->execute();
@@ -146,17 +148,18 @@ class SiteController extends Controller
     {
         $closing = $this->request->post(); 
         $user_id = Yii::$app->user->id;
+        $today = date("Y-m-d h:i:s");
         $keys = [];
         foreach($closing['closing'] as $key=>$c){
             $keys[] = $key;
-            $available_data = Taskresponses::find()->Where(" user_id = $user_id And task_id = $key And response=$c and DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT(CURDATE(), '%Y-%m-%d')")->all();
+            $available_data = Taskresponses::find()->Where(" user_id = $user_id And task_id = $key And response=$c and DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT('$today', '%Y-%m-%d')")->all();
             $cnt = count($available_data);
             
             if($cnt==0){
                 $model = new Taskresponses();
                 $model->user_id = $user_id;
                 $model->task_id = $key;
-                $model->timestamp = date("Y-m-d h:i:s");
+                $model->timestamp = $today;
                 $model->response = $c;
                 $model->save();
             }
@@ -164,7 +167,7 @@ class SiteController extends Controller
         $keys_list = implode("', '", $keys);
         $delete_sql = "DELETE FROM task_responses 
                WHERE user_id = $user_id And task_id Not IN('$keys_list') 
-               And DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT(CURDATE(), '%Y-%m-%d') 
+               And DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT('$today', '%Y-%m-%d') 
                AND task_id IN (SELECT id FROM tasks WHERE task_group = 2)"; 
         \Yii::$app->db->createCommand($delete_sql)->execute();    
         echo '<div class="alert alert-success"><strong>Success!</strong> Data saved successfully.</div>';
