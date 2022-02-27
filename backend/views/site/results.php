@@ -2,7 +2,6 @@
 $day = $_REQUEST['dayformated'];
 $user_id = $_REQUEST['user'];
 
-
 $sql = "SELECT t.*, tr.user_id, tr.timestamp, tr.response FROM tasks t
         Inner JOIN 
         (SELECT * FROM task_responses WHERE user_id = '$user_id' AND  DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT('$day', '%Y-%m-%d')) tr ON tr.task_id = t.id
@@ -34,8 +33,7 @@ if(count($tasks)>0){
         <?php
             foreach($tasks as $task){
                 if($task['task_group'] == '0'){ 
-                    //if($task['timestamp']){$pre_opening_disable = true;}
-            ?>
+        ?>
             <input type="checkbox" id="<?=$task['id']?>" class="check1" name="pre_opening[<?=$task['id']?>]" value="1"  <?= ($task['response'])?'checked':''; ?> > &nbsp; <label for="pre_opening"> <?=$task['task']?></label><br>      
         <?php } } ?>
         <hr />
@@ -51,11 +49,9 @@ if(count($tasks)>0){
         <hr />          
         <form id="prep_form">
         <?php
-            //$prep_disable = false;
             foreach($tasks as $task){
                 if($task['task_group'] == '1'){
-                //if($task['timestamp']){$prep_disable = true;}
-            ?>
+        ?>
             <input type="checkbox" id="<?=$task['id']?>" class="check2" name="prep[<?=$task['id']?>]" value="1" <?= ($task['response'])?'checked':''; ?> > &nbsp; <label for="prep"> <?=$task['task']?></label><br>      
         <?php } } ?>
         <hr />
@@ -72,11 +68,9 @@ if(count($tasks)>0){
         <hr />          
         <form id="closing_form">
         <?php
-            //$closing_disable = false;
             foreach($tasks as $task){
                 if($task['task_group'] == '2'){
-                //if($task['timestamp']){$closing_disable = true;}
-            ?>
+        ?>
             <input type="checkbox" id="<?=$task['id']?>" class="check3" name="closing[<?=$task['id']?>]" value="1" <?= ($task['response'])?'checked':''; ?> > &nbsp; <label for="closing"> <?=$task['task']?></label><br>      
         <?php } } ?>
         <hr />

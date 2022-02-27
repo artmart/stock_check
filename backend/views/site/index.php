@@ -6,13 +6,6 @@ $sql = "SELECT id, firstname, lastname from user where user_group in ('2', '3')"
 $users = Yii::$app->db->createCommand($sql)->queryAll();
 ?>
 <div class="site-index">
-<!--
-    <div class="jumbotron text-center bg-transparent">
-        <h1 class="display-4">Welcome!</h1>
-        <p class="lead">Your Admin Panel.</p>
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
--->
     <div class="body-content">
 
         <div class="row1">
@@ -46,74 +39,23 @@ $users = Yii::$app->db->createCommand($sql)->queryAll();
         </select>
         </div>
         
-        <?php /*
-        //$pre_opening_disable = false;
-            foreach($tasks as $task){
-                if($task['task_group'] == '0'){ 
-                    //if($task['timestamp']){$pre_opening_disable = true;}
-            ?>
-            <input type="checkbox" id="<?=$task['id']?>" class="check1" name="pre_opening[<?=$task['id']?>]" value="1"  <?= ($task['response'])?'checked':''; ?> > &nbsp; <label for="pre_opening"> <?=$task['task']?></label><br>      
-        <?php } } */?>
           <div class="col-lg-2">
           <button type="submit" class="btn btn-primary" onclick="results()">Submit</button> 
           </div>
         </div>
         </form>  
         
-                  <hr />
-          <div id="wait" style="display:none; z-index: 1000;" class="justify-content-center align-items-center"> <img src='/img/ajaxloader.gif'/> Loading...</div>
-          <div class="row"><div id="results" style="width: 100%;"></div></div>     
-        
-        
-        
-        
-        
-        
-        <!--
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-            -->
-            
+        <hr />
+        <div id="wait" style="display:none; z-index: 1000;" class="justify-content-center align-items-center"> <img src='/img/ajaxloader.gif'/> Loading...</div>
+        <div class="row"><div id="results" style="width: 100%;"></div></div>          
+                 
         </div>
 
     </div>
 </div>
 
 <script>
-
-$(function() {
-
-
-    //console.log(dayval.format('YYYY-MM-DD') );
-    
+$(function(){
   $('input[name="day"]').daterangepicker({
     singleDatePicker: true,
     showDropdowns: true,
@@ -126,31 +68,20 @@ $(function() {
     var years = moment().diff(start, 'years');
     alert("You are " + years + " years old!");
   }*/
-  function(start, end, label) {
-  //console.log(start.format('YYYY-MM-DD') );
-  	$('#dayformated').val(start.format('YYYY-MM-DD'));
-}
-  
-  
-  
+  function(start, end, label){
+        $('#dayformated').val(start.format('YYYY-MM-DD'));
+    }
   );
   
-      var dayval = $('#day').val();
+    var dayval = $('#day').val();
     $('#dayformated').val(moment(dayval).format('YYYY-MM-DD'));
-  
-  		$(".selectpicker").selectpicker({
-			noneSelectedText: 'Select SKU'
-		});
-  
+    //$(".selectpicker").selectpicker({noneSelectedText: 'Select SKU'});
 });
 
 /*
 	$(function() {
-
-
 		var start = moment().subtract(29, 'days');
 		var end = moment();
-
 		$('#start').val(start.format('YYYY-MM-D'));
 		$('#end').val(end.format('YYYY-MM-D'));
 
@@ -184,30 +115,22 @@ $(function() {
 	});
 */
 
-//$('#datepicker').datepicker({uiLibrary: 'bootstrap4'});
-
-
-
 $("#results_form").submit(function(){return false;});
 	
 function results(){
 
 //var atLeastOneIsChecked = $('.check1:checked').length; 
-
 //if(atLeastOneIsChecked==0){
  //   alert('Please select at least an one checkbox.');
 //}else{
 
 var data = $("#results_form").serialize();
 
-
 $.ajax({
 		type: 'post',
 		url: '/admin/site/results',
 		data: data,
-        beforeSend: function() {
-           $("#wait").css("display", "block");               
-          },
+        beforeSend: function(){$("#wait").css("display", "block");},
 		success: function (response){
 		     $("#wait").css("display", "none");
 		     $( '#results' ).html(response);
@@ -215,7 +138,5 @@ $.ajax({
              //setTimeout( "$('#results').hide();", 4000);
 		}
     }); 
-   // }
 }
-
 </script>

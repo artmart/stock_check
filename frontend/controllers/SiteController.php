@@ -82,7 +82,11 @@ class SiteController extends Controller
     
     public function actionPreopeningsave()
     {
-        $pre_opening = $this->request->post();         
+        
+        
+        $pre_opening = $this->request->post();  
+        
+        $pre_opening_note = $pre_opening['pre_opening_note'];       
         $user_id = Yii::$app->user->id;
         $today = date("Y-m-d h:i:s");
         $keys = [];
@@ -97,6 +101,7 @@ class SiteController extends Controller
                 $model->task_id = $key;
                 $model->timestamp = $today;
                 $model->response = $po;
+                $model->note = $pre_opening_note[$key];
                 $model->save();
             }
         }
@@ -115,7 +120,8 @@ class SiteController extends Controller
     
     public function actionPrepsave()
     {
-        $prep = $this->request->post(); 
+        $prep = $this->request->post();
+        $prep_note = $prep['prep_note'];  
         $user_id = Yii::$app->user->id;
         $today = date("Y-m-d h:i:s");
         $keys = [];
@@ -130,6 +136,7 @@ class SiteController extends Controller
                 $model->task_id = $key;
                 $model->timestamp = $today;
                 $model->response = $p;
+                $model->note = $prep_note[$key];
                 $model->save();
             }
         }
@@ -147,6 +154,7 @@ class SiteController extends Controller
     public function actionClosingsave()
     {
         $closing = $this->request->post(); 
+        $closing_note = $closing['closing_note']; 
         $user_id = Yii::$app->user->id;
         $today = date("Y-m-d h:i:s");
         $keys = [];
@@ -161,6 +169,7 @@ class SiteController extends Controller
                 $model->task_id = $key;
                 $model->timestamp = $today;
                 $model->response = $c;
+                $model->note = $closing_note[$key];
                 $model->save();
             }
         }

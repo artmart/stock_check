@@ -39,6 +39,7 @@ class Taskresponses extends \yii\db\ActiveRecord
             [['timestamp'], 'safe'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['task_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tasks::className(), 'targetAttribute' => ['task_id' => 'id']],
+            [['note'], 'string'],
         ];
     }
 
@@ -53,6 +54,7 @@ class Taskresponses extends \yii\db\ActiveRecord
             'task_id' => 'Task ID',
             'timestamp' => 'Timestamp',
             'response' => 'Response',
+            'note' => 'Note',
         ];
     }
 

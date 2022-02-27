@@ -1,5 +1,4 @@
 <?php
-
 namespace backend\controllers;
 
 use common\models\LoginForm;
@@ -66,7 +65,6 @@ class SiteController extends Controller
     
     public function actionResults()
     {
-        //var_dump($_REQUEST);
         return $this->renderPartial('results');
     }
 

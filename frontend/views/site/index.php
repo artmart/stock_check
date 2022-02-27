@@ -3,7 +3,7 @@ $this->title = 'Input data';
 
 $user_id = Yii::$app->user->id;
 $today = date("Y-m-d h:i:s");
-$sql = "SELECT t.*, tr.user_id, tr.timestamp, tr.response FROM tasks t
+$sql = "SELECT t.*, tr.user_id, tr.timestamp, tr.response, tr.note FROM tasks t
         Left JOIN 
         (SELECT * FROM task_responses WHERE user_id = '$user_id' AND  DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT('$today', '%Y-%m-%d')) tr ON tr.task_id = t.id
         WHERE t.`status` = 1";
@@ -40,12 +40,16 @@ $tasks = Yii::$app->db->createCommand($sql)->queryAll();
         <hr />          
         <form id="pre_opening_form">
         <?php
-        //$pre_opening_disable = false;
             foreach($tasks as $task){
                 if($task['task_group'] == '0'){ 
-                    //if($task['timestamp']){$pre_opening_disable = true;}
-            ?>
-            <input type="checkbox" id="<?=$task['id']?>" class="check1" name="pre_opening[<?=$task['id']?>]" value="1"  <?= ($task['response'])?'checked':''; ?> > &nbsp; <label for="pre_opening"> <?=$task['task']?></label><br>      
+        ?>
+        <div class="row">
+        <div class="col-sm-7">
+            <input type="checkbox" id="<?=$task['id']?>" class="check1" name="pre_opening[<?=$task['id']?>]" value="1"  <?= ($task['response'])?'checked':''; ?> > &nbsp; <label for="pre_opening"> <?=$task['task']?></label>
+        </div>    
+        <input type="text" id="<?=$task['id']?>" name="pre_opening_note[<?=$task['id']?>]" placeholder="Note" class="col-sm-4 hidd">
+        </div>   
+             
         <?php } } ?>
         <hr />
           <button type="submit" class="btn btn-primary" onclick="preopeningsave()">Submit</button> 
@@ -60,12 +64,16 @@ $tasks = Yii::$app->db->createCommand($sql)->queryAll();
         <hr />          
         <form id="prep_form">
         <?php
-            //$prep_disable = false;
             foreach($tasks as $task){
                 if($task['task_group'] == '1'){
-                //if($task['timestamp']){$prep_disable = true;}
-            ?>
+        ?>
+        <div class="row">
+        <div class="col-sm-7">
             <input type="checkbox" id="<?=$task['id']?>" class="check2" name="prep[<?=$task['id']?>]" value="1" <?= ($task['response'])?'checked':''; ?> > &nbsp; <label for="prep"> <?=$task['task']?></label><br>      
+        </div>    
+        <input type="text" id="<?=$task['id']?>" name="prep_note[<?=$task['id']?>]" placeholder="Note" class="col-sm-4 hidd">
+        </div> 
+        
         <?php } } ?>
         <hr />
           <button type="submit" class="btn btn-primary" onclick="prepsave()">Submit</button> 
@@ -81,12 +89,16 @@ $tasks = Yii::$app->db->createCommand($sql)->queryAll();
         <hr />          
         <form id="closing_form">
         <?php
-            //$closing_disable = false;
             foreach($tasks as $task){
                 if($task['task_group'] == '2'){
-                //if($task['timestamp']){$closing_disable = true;}
-            ?>
+        ?>
+        <div class="row">
+        <div class="col-sm-7">
             <input type="checkbox" id="<?=$task['id']?>" class="check3" name="closing[<?=$task['id']?>]" value="1" <?= ($task['response'])?'checked':''; ?> > &nbsp; <label for="closing"> <?=$task['task']?></label><br>      
+        </div>    
+        <input type="text" id="<?=$task['id']?>" name="closing_note[<?=$task['id']?>]" placeholder="Note" class="col-sm-4 hidd">
+        </div> 
+        
         <?php } } ?>
         <hr />
           <button type="submit" class="btn btn-primary" onclick="closingsave()">Submit</button> 
@@ -128,7 +140,46 @@ $("#pre_opening_form").submit(function(){return false;});
 $("#prep_form").submit(function(){return false;});
 $("#closing_form").submit(function(){return false;});
 
+////////////////
+$('.check1').on('change', function(){
+  $('input[name="pre_opening_note['+this.id+']"]').toggle();
+})
 
+$('.check1').each(function() {
+     if($('input[name="pre_opening['+this.id+']"]').prop('checked')) {  
+         $('input[name="pre_opening_note['+this.id+']"]').show();
+       } else {
+         $('input[name="pre_opening_note['+this.id+']"]').hide();
+       }
+});
+
+
+$('.check2').on('change', function(){
+  $('input[name="prep_note['+this.id+']"]').toggle();
+})
+
+$('.check2').each(function() {
+     if($('input[name="prep['+this.id+']"]').prop('checked')) {  
+         $('input[name="prep_note['+this.id+']"]').show();
+       } else {
+         $('input[name="prep_note['+this.id+']"]').hide();
+       }
+});
+
+
+$('.check3').on('change', function(){
+  $('input[name="closing_note['+this.id+']"]').toggle();
+})
+
+$('.check3').each(function() {
+     if($('input[name="closing['+this.id+']"]').prop('checked')) {  
+         $('input[name="closing_note['+this.id+']"]').show();
+       } else {
+         $('input[name="closing_note['+this.id+']"]').hide();
+       }
+});
+
+//////////////////////
 	
 function preopeningsave(){
 
