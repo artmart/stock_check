@@ -103,6 +103,9 @@ class SiteController extends Controller
                 $model->response = $po;
                 $model->note = $pre_opening_note[$key];
                 $model->save();
+            }else if($available_data[0]->note!==$pre_opening_note[$key]){
+                $available_data[0]->note=$pre_opening_note[$key];
+                $available_data[0]->save(); 
             }
         }
         
@@ -138,6 +141,9 @@ class SiteController extends Controller
                 $model->response = $p;
                 $model->note = $prep_note[$key];
                 $model->save();
+            }else if($available_data[0]->note!==$prep_note[$key]){
+                $available_data[0]->note=$prep_note[$key];
+                $available_data[0]->save(); 
             }
         }
         $keys_list = implode("', '", $keys); 
@@ -171,6 +177,9 @@ class SiteController extends Controller
                 $model->response = $c;
                 $model->note = $closing_note[$key];
                 $model->save();
+            }else if($available_data[0]->note!==$closing_note[$key]){
+                $available_data[0]->note=$closing_note[$key];
+                $available_data[0]->save(); 
             }
         }
         $keys_list = implode("', '", $keys);
