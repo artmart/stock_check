@@ -82,8 +82,6 @@ class SiteController extends Controller
     
     public function actionPreopeningsave()
     {
-        
-        
         $pre_opening = $this->request->post();  
         
         $pre_opening_note = $pre_opening['pre_opening_note'];       
@@ -119,8 +117,6 @@ class SiteController extends Controller
         echo '<div class="alert alert-success"><strong>Success!</strong> Data saved successfully.</div>';
     }
     
-    
-    
     public function actionPrepsave()
     {
         $prep = $this->request->post();
@@ -155,7 +151,6 @@ class SiteController extends Controller
         \Yii::$app->db->createCommand($delete_sql)->execute();
         echo '<div class="alert alert-success"><strong>Success!</strong> Data saved successfully.</div>';  
     }
-    
     
     public function actionClosingsave()
     {

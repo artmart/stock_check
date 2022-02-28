@@ -10,13 +10,6 @@ $sql = "SELECT t.*, tr.user_id, tr.timestamp, tr.response, tr.note FROM tasks t
 $tasks = Yii::$app->db->createCommand($sql)->queryAll();
 ?>
 <div class="site-index">
-    <!--
-    <div class="jumbotron text-center bg-transparent">
-        <h1 class="display-4">Welcome!</h1>
-        <p class="lead">Web application.</p>
-    </div>
-    -->
-
     <div class="body-content">
 
 <div class="row1">
@@ -110,30 +103,8 @@ $tasks = Yii::$app->db->createCommand($sql)->queryAll();
 </div>
            
         </div>
-
     </div>
 </div>
-
-<?php 
-/*
-if(<?=$pre_opening_disable?>){
-    $("#pre_opening_form input").prop("disabled", true);
-    $('#pre_opening_form :input[type=submit]').prop('disabled', true);
-} 
-
-if(<?=$prep_disable?>){
-    $("#prep_form input").prop("disabled", true);
-    $('#prep_form :input[type=submit]').prop('disabled', true);
-}
-
-if(<?=$closing_disable?>){
-    $("#closing_form input").prop("disabled", true);
-    $('#closing_form :input[type=submit]').prop('disabled', true);
-}
-
-*/ 
-?>
-
 
 <script>
 $("#pre_opening_form").submit(function(){return false;});

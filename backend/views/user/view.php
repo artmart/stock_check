@@ -8,7 +8,7 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 
 $statuses = ['10' => 'Active', '9' => 'Inactive'];
-$usergroups = ['1' => 'Administrator', '2' => 'User'];
+$usergroups = ['1' => 'Administrator', '2' => 'Staff', '3' => 'Manager'];
 ?>
 <div class="user-view">
 <div class="row clearfix">
