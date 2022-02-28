@@ -36,14 +36,8 @@ $usergroups = ['1' => 'Administrator', '2' => 'Staff', '3' => 'Manager'];
             //'password_reset_token',
             'email:email',
             //'status',
-            [
-                'attribute' => 'status',
-                'value' =>  $statuses[$model->status],
-            ],
-            [
-                'attribute' => 'user_group',
-                'value' =>  $usergroups[$model->user_group],
-            ],
+            ['attribute' => 'status', 'value' =>  $statuses[$model->status]],
+            ['attribute' => 'user_group', 'value' =>  $usergroups[$model->user_group]],
             'created_at:date',
             //'updated_at',
             //'verification_token',

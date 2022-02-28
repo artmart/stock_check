@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=>function($data) {
                     $arr = ['1' => 'Administrator', '2' => 'Staff', '3' => 'Manager'];
                     return $arr[$data->user_group];
-                    }, // ($data->user_group==1)?'Administrator':'User';}, 
+                    },  
             ],
             [
                 'attribute' => 'status',
