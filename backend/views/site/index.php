@@ -31,6 +31,7 @@ $users = Yii::$app->db->createCommand($sql)->queryAll();
 		</div>
 		</div>
         -->
+        <?php /*
         <div class="col-lg-3">
         <select class="selectpicker" data-live-search="true" name="user" id="user">
         <?php foreach($users as $u){ ?>
@@ -38,9 +39,10 @@ $users = Yii::$app->db->createCommand($sql)->queryAll();
         <?php } ?>
         </select>
         </div>
+        */ ?>
         
           <div class="col-lg-2">
-          <button type="submit" class="btn btn-primary" onclick="results()">Submit</button> 
+          <button type="submit" class="btn btn-primary" onclick="results()">Filter</button> 
           </div>
         </div>
         </form>  

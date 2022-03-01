@@ -1,11 +1,31 @@
 <?php
 $day = $_REQUEST['dayformated'];
+
+/*
 $user_id = $_REQUEST['user'];
 
 $sql = "SELECT t.*, tr.user_id, tr.timestamp, tr.response FROM tasks t
         Inner JOIN 
         (SELECT * FROM task_responses WHERE user_id = '$user_id' AND  DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT('$day', '%Y-%m-%d')) tr ON tr.task_id = t.id
         WHERE t.`status` = 1";
+*/ 
+
+       
+$sql = "SELECT distinct t.id, t.task_group, t.task, tr.response, tr.note, us.usr FROM tasks t 
+        Inner JOIN task_responses tr ON tr.task_id = t.id 
+        INNER JOIN 
+        (
+            SELECT tr2.task_id, GROUP_CONCAT(distinct CONCAT(u.firstname, ' ', u.lastname)) usr FROM user u
+            INNER JOIN task_responses tr2 ON tr2.user_id = u.id
+            WHERE DATE_FORMAT(tr2.TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT('$day', '%Y-%m-%d')
+            GROUP BY tr2.task_id
+        ) us ON us.task_id = tr.task_id
+        
+        WHERE DATE_FORMAT(tr.TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT('$day', '%Y-%m-%d')
+        And t.`status` = 1";
+        
+//echo $sql;
+
 
 $tasks = Yii::$app->db->createCommand($sql)->queryAll();
 if(count($tasks)>0){
@@ -27,68 +47,74 @@ if(count($tasks)>0){
   <div class="tab-pane fade show active" id="preopening" role="tabpanel" aria-labelledby="preopening-tab">
   
         <br />
-        <h2>Pre Opening</h2>   
-        <hr />          
-        <form id="pre_opening_form">
-        <?php
-            foreach($tasks as $task){
-                if($task['task_group'] == '0'){ 
-        ?>
-            <input type="checkbox" id="<?=$task['id']?>" class="check1" name="pre_opening[<?=$task['id']?>]" value="1"  <?= ($task['response'])?'checked':''; ?> > &nbsp; <label for="pre_opening"> <?=$task['task']?></label><br>      
-        <?php } } ?>
-        <hr />
-         <!-- <button type="submit" class="btn btn-primary" onclick="preopeningsave()">Submit</button> 
-          <hr />
-          <div id="wait0" style="display:none; z-index: 1000;" class="justify-content-center align-items-center"> <img src='/img/ajaxloader.gif'/> Loading...</div>
-          <div class="row"><div id="results0" style="width: 100%;"></div></div>-->
-        </form>
+        <h2>Pre Opening</h2>     
+
+        <table class="table table-sm">
+          <thead>
+            <tr><th>TASK</th><th>USERs</th></tr>
+          </thead>
+          <tbody>
+                <?php
+                    foreach($tasks as $task){
+                        if($task['task_group'] == '0'){ 
+                ?>
+                <tr>
+                  <td><i class="fa fa-check" aria-hidden="true"></i> <?=$task['task']?></td>
+                  <td><?=$task['usr']?></td>
+                </tr> 
+                <?php } } ?>
+          </tbody>
+        </table>
+
+
   </div>
   <div class="tab-pane fade" id="preptab" role="tabpanel" aria-labelledby="preptab-tab">
         <br />
         <h2>Prep</h2>   
-        <hr />          
-        <form id="prep_form">
-        <?php
-            foreach($tasks as $task){
-                if($task['task_group'] == '1'){
-        ?>
-            <input type="checkbox" id="<?=$task['id']?>" class="check2" name="prep[<?=$task['id']?>]" value="1" <?= ($task['response'])?'checked':''; ?> > &nbsp; <label for="prep"> <?=$task['task']?></label><br>      
-        <?php } } ?>
-        <hr />
-         <!-- <button type="submit" class="btn btn-primary" onclick="prepsave()">Submit</button> 
-          <hr />
-          <div id="wait1" style="display:none; z-index: 1000;" class="justify-content-center align-items-center"> <img src='/img/ajaxloader.gif'/> Loading...</div>
-          <div class="row"><div id="results1" style="width: 100%;"></div></div>-->
-        </form>
+
+        <table class="table table-sm">
+          <thead>
+            <tr><th>TASK</th><th>USERs</th></tr>
+          </thead>
+          <tbody>
+                <?php
+                    foreach($tasks as $task){
+                        if($task['task_group'] == '1'){ 
+                ?>
+                <tr>
+                  <td><i class="fa fa-check" aria-hidden="true"></i> <?=$task['task']?></td>
+                  <td><?=$task['usr']?></td>
+                </tr> 
+                <?php } } ?>
+          </tbody>
+        </table>
   
   </div>
   <div class="tab-pane fade" id="closing" role="tabpanel" aria-labelledby="closing-tab">
         <br />
         <h2>Closing</h2>   
-        <hr />          
-        <form id="closing_form">
-        <?php
-            foreach($tasks as $task){
-                if($task['task_group'] == '2'){
-        ?>
-            <input type="checkbox" id="<?=$task['id']?>" class="check3" name="closing[<?=$task['id']?>]" value="1" <?= ($task['response'])?'checked':''; ?> > &nbsp; <label for="closing"> <?=$task['task']?></label><br>      
-        <?php } } ?>
-        <hr />
-          <!--<button type="submit" class="btn btn-primary" onclick="closingsave()">Submit</button> 
-          <hr />
-          <div id="wait2" style="display:none; z-index: 1000;" class="justify-content-center align-items-center"> <img src='/img/ajaxloader.gif'/> Loading...</div>
-          <div class="row"><div id="results2" style="width: 100%;"></div></div>-->
-        </form>
+        
+        <table class="table table-sm">
+          <thead>
+            <tr><th>TASK</th><th>USERs</th></tr>
+          </thead>
+          <tbody>
+                <?php
+                    foreach($tasks as $task){
+                        if($task['task_group'] == '2'){ 
+                ?>
+                <tr>
+                  <td><i class="fa fa-check" aria-hidden="true"></i> <?=$task['task']?></td>
+                  <td><?=$task['usr']?></td>
+                </tr> 
+                <?php } } ?>
+          </tbody>
+        </table>
+          
   </div>
 </div>
            
 </div>
-
-<script>
-    $("#pre_opening_form input").prop("disabled", true);
-    $("#prep_form input").prop("disabled", true);
-    $("#closing_form input").prop("disabled", true);
-</script>
 <?php }else{ 
     	echo "<center><img style='height: 100%;' src='".Yii::getAlias('/img/nodata.png')."'/></center>";
     

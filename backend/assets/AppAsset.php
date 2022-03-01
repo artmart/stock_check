@@ -14,6 +14,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'vendor/bootstrap-daterangepicker/daterangepicker.css',
         'vendor/bootstrap-select/css/bootstrap-select.min.css',
+        'vendor/fontawesome/css/font-awesome.min.css',
         'css/site.css',
     ];
     public $js = [
