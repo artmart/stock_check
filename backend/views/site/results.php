@@ -24,7 +24,7 @@ $sql = "SELECT distinct t.id, t.task_group, t.task, tr.response, tr.note, us.usr
         WHERE DATE_FORMAT(tr.TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT('$day', '%Y-%m-%d')
         And t.`status` = 1";
         
-echo $sql;
+//echo $sql;
 
 
 $tasks = Yii::$app->db->createCommand($sql)->queryAll();
