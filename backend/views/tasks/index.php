@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="tasks-index">
     <h1 class="float-left"><?= Html::encode($this->title) ?></h1>
     <p class="float-right">
-        <?= Html::a('<span class="glyphicon glyphicon-plus"></span> Add', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<i class="fa fa-plus" aria-hidden="true"></i>  Add', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <div class="clearfix"></div>
     <hr />

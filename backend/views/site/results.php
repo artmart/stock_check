@@ -24,9 +24,6 @@ $sql = "SELECT distinct t.id, t.task_group, t.task, tr.response, tr.note, us.usr
         WHERE DATE_FORMAT(tr.TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT('$day', '%Y-%m-%d')
         And t.`status` = 1";
         
-//echo $sql;
-
-
 $tasks = Yii::$app->db->createCommand($sql)->queryAll();
 if(count($tasks)>0){
 ?>
@@ -46,26 +43,25 @@ if(count($tasks)>0){
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="preopening" role="tabpanel" aria-labelledby="preopening-tab">
   
-        <br />
-        <h2>Pre Opening</h2>     
+    <br />
+    <h2>Pre Opening</h2>     
 
-        <table class="table table-sm">
-          <thead>
-            <tr><th>TASK</th><th>USERs</th></tr>
-          </thead>
-          <tbody>
-                <?php
-                    foreach($tasks as $task){
-                        if($task['task_group'] == '0'){ 
-                ?>
-                <tr>
-                  <td><i class="fa fa-check" aria-hidden="true"></i> <?=$task['task']?></td>
-                  <td><?=$task['usr']?></td>
-                </tr> 
-                <?php } } ?>
-          </tbody>
-        </table>
-
+    <table class="table table-sm">
+      <thead>
+        <tr><th>TASK</th><th>USERs</th></tr>
+      </thead>
+      <tbody>
+            <?php
+                foreach($tasks as $task){
+                    if($task['task_group'] == '0'){ 
+            ?>
+            <tr>
+              <td><i class="fa fa-check" aria-hidden="true"></i> <?=$task['task']?></td>
+              <td><?=$task['usr']?></td>
+            </tr> 
+            <?php } } ?>
+      </tbody>
+    </table>
 
   </div>
   <div class="tab-pane fade" id="preptab" role="tabpanel" aria-labelledby="preptab-tab">
@@ -73,9 +69,7 @@ if(count($tasks)>0){
         <h2>Prep</h2>   
 
         <table class="table table-sm">
-          <thead>
-            <tr><th>TASK</th><th>USERs</th></tr>
-          </thead>
+          <thead><tr><th>TASK</th><th>USERs</th></tr></thead>
           <tbody>
                 <?php
                     foreach($tasks as $task){
@@ -95,9 +89,7 @@ if(count($tasks)>0){
         <h2>Closing</h2>   
         
         <table class="table table-sm">
-          <thead>
-            <tr><th>TASK</th><th>USERs</th></tr>
-          </thead>
+          <thead><tr><th>TASK</th><th>USERs</th></tr></thead>
           <tbody>
                 <?php
                     foreach($tasks as $task){
@@ -117,5 +109,4 @@ if(count($tasks)>0){
 </div>
 <?php }else{ 
     	echo "<center><img style='height: 100%;' src='".Yii::getAlias('/img/nodata.png')."'/></center>";
-    
 } ?>

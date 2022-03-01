@@ -38,7 +38,7 @@ $tasks = Yii::$app->db->createCommand($sql)->queryAll();
         ?>
         <div class="row">
         <div class="col-sm-7">
-            <input type="checkbox" id="<?=$task['id']?>" class="check1" name="pre_opening[<?=$task['id']?>]" value="1"  <?= ($task['response'])?'checked':''; ?> > &nbsp; <label for="pre_opening"> <?=$task['task']?></label>
+            <input type="checkbox" id="<?=$task['id']?>" class="check1" name="pre_opening[<?=$task['id']?>]" value="1"  <?= ($task['response'])?'checked disabled':''; ?> > &nbsp; <label for="pre_opening"> <?=$task['task']?></label>
         </div>    
         <input type="text" id="<?=$task['id']?>" name="pre_opening_note[<?=$task['id']?>]" value="<?=$task['note']?>" placeholder="Note" class="col-sm-4 hidd">
         </div>   
@@ -62,7 +62,7 @@ $tasks = Yii::$app->db->createCommand($sql)->queryAll();
         ?>
         <div class="row">
         <div class="col-sm-7">
-            <input type="checkbox" id="<?=$task['id']?>" class="check2" name="prep[<?=$task['id']?>]" value="1" <?= ($task['response'])?'checked':''; ?> > &nbsp; <label for="prep"> <?=$task['task']?></label><br>      
+            <input type="checkbox" id="<?=$task['id']?>" class="check2" name="prep[<?=$task['id']?>]" value="1" <?= ($task['response'])?'checked disabled':''; ?> > &nbsp; <label for="prep"> <?=$task['task']?></label><br>      
         </div>    
         <input type="text" id="<?=$task['id']?>" name="prep_note[<?=$task['id']?>]" value="<?=$task['note']?>" placeholder="Note" class="col-sm-4 hidd">
         </div> 
@@ -87,7 +87,7 @@ $tasks = Yii::$app->db->createCommand($sql)->queryAll();
         ?>
         <div class="row">
         <div class="col-sm-7">
-            <input type="checkbox" id="<?=$task['id']?>" class="check3" name="closing[<?=$task['id']?>]" value="1" <?= ($task['response'])?'checked':''; ?> > &nbsp; <label for="closing"> <?=$task['task']?></label><br>      
+            <input type="checkbox" id="<?=$task['id']?>" class="check3" name="closing[<?=$task['id']?>]" value="1" <?= ($task['response'])?'checked disabled':''; ?> > &nbsp; <label for="closing"> <?=$task['task']?></label><br>      
         </div>    
         <input type="text" id="<?=$task['id']?>" name="closing_note[<?=$task['id']?>]" value="<?=$task['note']?>" placeholder="Note" class="col-sm-4 hidd">
         </div> 

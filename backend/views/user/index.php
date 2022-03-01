@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="row">
     <h1 class="col-sm-10"><?= Html::encode($this->title) ?></h1>
     <p class="col-sm-2 d-flex justify-content-end">
-        <?= Html::a('<span class="glyphicon glyphicon-plus"></span> Add', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<i class="fa fa-plus" aria-hidden="true"></i>  Add', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 </div>
 <hr />
