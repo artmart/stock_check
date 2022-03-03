@@ -8,7 +8,7 @@ use backend\models\Endofdayfigures;
 use backend\models\User;
 use yii\helpers\ArrayHelper;
 
-$this->title = 'Endofdayfigures';
+$this->title = 'End of day figures';
 $this->params['breadcrumbs'][] = $this->title;
 
 $users =  ArrayHelper::map(User::find()->asArray()->all(), 'id', 'firstname');

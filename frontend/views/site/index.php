@@ -244,6 +244,7 @@ $.ajax({
 		success: function (response){
 		     $("#wait0").css("display", "none");
 		     $( '#results0' ).html(response);
+             alert('Data saved successfully.');
              //$('html,body').animate({scrollTop: $("#results0").offset().top},'slow');
              //setTimeout( "$('#results0').hide();", 3000);
              window.location.href = "/";
@@ -273,6 +274,7 @@ $.ajax({
 		success: function (response){
 		     $("#wait1").css("display", "none");
 		     $( '#results1' ).html(response);
+              alert('Data saved successfully.');
              //$('html,body').animate({scrollTop: $("#results1").offset().top},'slow');
              //setTimeout( "$('#results1').hide();", 3000);
              window.location.href = "/?active_tab=preptab";
@@ -301,6 +303,7 @@ $.ajax({
 		success: function (response){
 		     $("#wait2").css("display", "none");
 		     $( '#results2' ).html(response);
+              alert('Data saved successfully.');
              //$('html,body').animate({scrollTop: $("#results2").offset().top},'slow');
              //setTimeout( "$('#results2').hide();", 4000);
              window.location.href = "/?active_tab=closing";
