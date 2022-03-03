@@ -113,7 +113,7 @@ class SiteController extends Controller
                        And DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT('$today', '%Y-%m-%d') 
                        AND task_id IN (SELECT id FROM tasks WHERE task_group = 0)";
                                 
-        \Yii::$app->db->createCommand($delete_sql)->execute();
+        //\Yii::$app->db->createCommand($delete_sql)->execute();
         echo '<div class="alert alert-success"><strong>Success!</strong> Data saved successfully.</div>';
     }
     
@@ -148,7 +148,7 @@ class SiteController extends Controller
                And DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT('$today', '%Y-%m-%d') 
                AND task_id IN (SELECT id FROM tasks WHERE task_group = 1)";
                
-        \Yii::$app->db->createCommand($delete_sql)->execute();
+        //\Yii::$app->db->createCommand($delete_sql)->execute();
         echo '<div class="alert alert-success"><strong>Success!</strong> Data saved successfully.</div>';  
     }
     
@@ -182,7 +182,7 @@ class SiteController extends Controller
                WHERE user_id = $user_id And task_id Not IN('$keys_list') 
                And DATE_FORMAT(TIMESTAMP, '%Y-%m-%d') = DATE_FORMAT('$today', '%Y-%m-%d') 
                AND task_id IN (SELECT id FROM tasks WHERE task_group = 2)"; 
-        \Yii::$app->db->createCommand($delete_sql)->execute();    
+        //\Yii::$app->db->createCommand($delete_sql)->execute();    
         echo '<div class="alert alert-success"><strong>Success!</strong> Data saved successfully.</div>';
     }
 
